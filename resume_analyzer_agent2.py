@@ -92,7 +92,10 @@ def main():
             st.warning("请配置OPENAI API密钥")
         
         st.markdown("### 系统功能")
-        st.markdown("项目上传分析\nAI智能评分\n个性化建议\n优化指导")
+        st.markdown("- 项目上传分析")
+        st.markdown("- AI智能评分")
+        st.markdown("- 个性化建议")
+        st.markdown("- 优化指导")
     
     st.title("智策云擎")
     st.markdown("### 基于AI的专业分析与优化指导平台")
