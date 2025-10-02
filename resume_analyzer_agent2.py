@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-简历分析智能体
+智策云擎
 """
 import streamlit as st
 from openai import OpenAI
 
 Api_BASE_url = "https://api.siliconflow.cn/v1"
-TARGET_POSITIONS = ["岗位", "python开发工程师", "产品经理", "数据分析师", "UI/UX设计师"]
+TARGET_POSITIONS = ["简历内容", "营销方案", "演练预案", "数据分析师", "UI/UX设计师"]
 
 def extract_file_content(uploaded_file):
     """
@@ -22,7 +22,7 @@ def extract_file_content(uploaded_file):
 
 def get_resume_content(uploaded_file, resume_test):
     """
-    获取简历内容
+    获取类别内容
     """
     if uploaded_file:
         resume_content = extract_file_content(uploaded_file)
@@ -34,7 +34,7 @@ def get_resume_content(uploaded_file, resume_test):
 
 def analyze_resume_with_ai(resume_text, target_position, api_key):
     """
-    分析简历内容
+    分析类别内容
     """
     if not api_key or api_key.strip() == "":
         return "请先配置OpenAI API密钥"
@@ -63,7 +63,7 @@ def handle_analyze_click(uploaded_file, resume_test, target_position, api_key):
     """
     content = get_resume_content(uploaded_file, resume_test)
     if not content:
-        st.warning("请输入简历内容或上传简历文件")
+        st.warning("请输入类别内容或上传文件")
         return
     
     with st.spinner("正在分析..."):
@@ -77,7 +77,7 @@ def main():
     """
     主函数
     """
-    st.set_page_config(page_title="简历分析智能体", page_icon=":memo:", layout="wide")
+    st.set_page_config(page_title="智策云擎", page_icon=":memo:", layout="wide")
     
     if "analysis_result" not in st.session_state:
         st.session_state.analysis_result = None
@@ -92,20 +92,20 @@ def main():
             st.warning("请配置OPENAI API密钥")
         
         st.markdown("### 系统功能")
-        st.markdown("简历上传分析\nAI智能评分\n个性化建议\n职业规划指导")
+        st.markdown("项目上传分析\nAI智能评分\n个性化建议\n优化指导")
     
-    st.title("简历分析智能体")
-    st.markdown("### 基于AI的专业简历分析与职业指导平台")
+    st.title("智策云擎")
+    st.markdown("### 基于AI的专业分析与优化指导平台")
     
     col1, col2 = st.columns([1, 1])
     
     with col1:
-        st.markdown("#### 上传简历")
-        target_position = st.selectbox("选择目标岗位", TARGET_POSITIONS, help="请选择要应聘的岗位类型")
+        st.markdown("#### 上传材料")
+        target_position = st.selectbox("选择目标类别", TARGET_POSITIONS, help="请选择要分析的项目类别")
         uploaded_file = st.file_uploader("上传简历文件(支持TXT)", type=["txt"])
         
-        st.markdown("#### 输入简历内容")
-        resume_test = st.text_area("或直接输入简历内容", height=200, help="输入要分析的简历内容")
+        st.markdown("#### 输入内容")
+        resume_test = st.text_area("或直接输入内容", height=200, help="输入要分析的内容")
         
         if st.button("开始AI分析", type="primary", use_container_width=True):
             handle_analyze_click(uploaded_file, resume_test, target_position, api_key)
@@ -132,12 +132,12 @@ def main():
             - 个性化分析
             - 智能评分
             - 针对性建议
-            - 职业规划
+            - 优化规划
 
             使用说明：
             1. 配置API密钥
-            2. 选择目标岗位
-            3. 上传简历或输入内容
+            2. 选择项目类别
+            3. 上传文件或输入内容
             4. 点击开始分析
             """)
 
