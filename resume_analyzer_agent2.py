@@ -6,7 +6,7 @@ import streamlit as st
 from openai import OpenAI
 
 Api_BASE_url = "https://api.siliconflow.cn/v1"
-TARGET_POSITIONS = ["岗位", "python开发工程师", "产品经理", "数据分析师", "UI/UX设计师"]
+TARGET_POSITIONS = ["岗位", "python开发工程师", "产品经理", "数据分析师", "UI/UX设计师","前端工程师"]
 
 def extract_file_content(uploaded_file):
     """
@@ -143,3 +143,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
