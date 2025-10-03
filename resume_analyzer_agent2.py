@@ -105,7 +105,7 @@ def main():
     with col1:
         st.markdown("#### 上传材料")
         target_position = st.selectbox("选择目标类别", TARGET_POSITIONS, help="请选择要分析的项目类别")
-        uploaded_file = st.file_uploader("上传简历文件(支持TXT)", type=["txt"])
+        uploaded_file = st.file_uploader("上传文件(支持TXT)", type=["txt"])
         
         st.markdown("#### 输入内容")
         resume_test = st.text_area("或直接输入内容", height=200, help="输入要分析的内容")
@@ -146,3 +146,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
