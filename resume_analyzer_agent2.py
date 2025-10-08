@@ -6,7 +6,7 @@ import streamlit as st
 from openai import OpenAI
 
 Api_BASE_url = "https://api.siliconflow.cn/v1"
-TARGET_POSITIONS = ["简历内容", "营销方案", "演练预案", "数据分析师", "UI/UX设计师"]
+TARGET_POSITIONS = ["职业规划", "营销方案",  "数据分析师"]
 
 def extract_file_content(uploaded_file):
     """
@@ -44,12 +44,12 @@ def analyze_resume_with_ai(resume_text, target_position, api_key):
         base_url=Api_BASE_url,
     )
     
-    prompt = f"作为专业的HR顾问，请分析以下简历，针对{target_position}岗位进行评估，判断其是否符合目标岗位要求：{resume_text}\n请提供1，总体评分（0-100分）2，详细分析和改进建议3，核心优势和发展建议 要求评分和建议完全基于简历内容，个性化分析，避免模板化回复"
+    prompt = f"你是一名拥有10年经验的职业规划顾问、数据分析师和营销策划专家。请分析提交内容，针对{target_position}内容进行专业评估，判断其是否符合专业方案要求：{resume_text}\n请提供1，总体评分（0-100分）2，详细分析和改进建议3，核心优势和发展建议4, 差异化优势分析5,针对上传的营销方案中存在的问题进行方案可行性修改建议 6, 市场价值定位,要求评分和建议完全基于上传内容，个性化分析，避免模板化回复"
     
     response = client.chat.completions.create(
         model="Qwen/Qwen2.5-72B-Instruct",
         messages=[
-            {"role": "system", "content": "你是一个专业的简历分析顾问,根据简历内容给出客观个性化的分析和建议"},
+            {"role": "system", "content": "你是一名拥有10年经验的职业规划顾问、数据分析师和营销策划专家,根据上传内容给出客观个性化的分析和建议"},
             {"role": "user", "content": prompt}
         ],
         max_tokens=1500,
@@ -116,7 +116,7 @@ def main():
     with col2:
         st.markdown("#### 分析结果")
         if st.session_state.analysis_result:
-            st.markdown(f"### 目标岗位：{st.session_state.get('target_position', '未选择')}")
+            st.markdown(f"### 项目类别：{st.session_state.get('target_position', '未选择')}")
             with st.container():
                 st.markdown(st.session_state.analysis_result)
                 
@@ -146,4 +146,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
